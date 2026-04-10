@@ -78,7 +78,7 @@ export async function validateAttendanceRequest(
   const hmacValid = verifyHMAC(payload as unknown as Record<string, unknown>, deviceSecret);
 
   if (!hmacValid) {
-    await logSecurityEvent('TAMPERED_PAYLOAD', payload);
+    await logSecurityEvent('TAMPERED_PAYLOAD', payload as unknown as Record<string, unknown>);
     return {
       approved: false,
       reason: 'INTEGRITY_FAILED',
@@ -113,7 +113,7 @@ export async function validateAttendanceRequest(
       .digest('hex');
 
     if (computedHash !== payload.imageHash) {
-      await logSecurityEvent('IMAGE_HASH_MISMATCH', payload);
+      await logSecurityEvent('IMAGE_HASH_MISMATCH', payload as unknown as Record<string, unknown>);
       return {
         approved: false,
         reason: 'IMAGE_INTEGRITY_FAILED',

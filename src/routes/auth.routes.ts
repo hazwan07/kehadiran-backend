@@ -77,7 +77,7 @@ router.post('/login', async (req: Request, res: Response): Promise<void> => {
     }
 
     // Verify PIN with bcrypt
-    const isValidPin = await bcrypt.compare(pin, employee.pin);
+    const isValidPin = await bcrypt.compare(pin, employee.pin || '');
     if (!isValidPin) {
       const result = trackFailedAttempt(employeeId);
       res.status(401).json({
