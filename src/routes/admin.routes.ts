@@ -112,7 +112,7 @@ router.get('/employees', async (req: Request, res: Response): Promise<void> => {
     res.status(200).json({ success: true, data: result });
   } catch (error) {
     console.error('[Admin] Gagal menarik rekod pekerja:', error);
-    res.status(500).json({ success: false, error: { message: 'Ralat pelayan' } });
+    res.status(500).json({ success: false, error: { message: error instanceof Error ? error.message : String(error) } });
   }
 });
 
@@ -145,7 +145,7 @@ router.post('/employees', async (req: Request, res: Response): Promise<void> => 
     res.status(201).json({ success: true, data: { ...newEmployee, devices: 0 } });
   } catch (error) {
     console.error('[Admin] Gagal tambah pekerja:', error);
-    res.status(500).json({ success: false, error: { message: 'Ralat pelayan' } });
+    res.status(500).json({ success: false, error: { message: error instanceof Error ? error.message : String(error) } });
   }
 });
 
@@ -181,7 +181,7 @@ router.put('/employees/:id', async (req: Request, res: Response): Promise<void> 
     res.status(200).json({ success: true, data: { employeeId: id, ...updateData } });
   } catch (error) {
     console.error('[Admin] Gagal kemaskini pekerja:', error);
-    res.status(500).json({ success: false, error: { message: 'Ralat pelayan' } });
+    res.status(500).json({ success: false, error: { message: error instanceof Error ? error.message : String(error) } });
   }
 });
 
@@ -209,7 +209,7 @@ router.get('/sites', async (req: Request, res: Response): Promise<void> => {
     res.status(200).json({ success: true, data: result });
   } catch (error) {
     console.error('[Admin] Gagal menarik rekod lokasi:', error);
-    res.status(500).json({ success: false, error: { message: 'Ralat pelayan' } });
+    res.status(500).json({ success: false, error: { message: error instanceof Error ? error.message : String(error) } });
   }
 });
 
@@ -238,7 +238,7 @@ router.post('/sites', async (req: Request, res: Response): Promise<void> => {
     res.status(201).json({ success: true, data: { ...newSite, workers: 0, active: 0 } });
   } catch (error) {
     console.error('[Admin] Gagal tambah tapak:', error);
-    res.status(500).json({ success: false, error: { message: 'Ralat pelayan' } });
+    res.status(500).json({ success: false, error: { message: error instanceof Error ? error.message : String(error) } });
   }
 });
 
@@ -266,7 +266,7 @@ router.put('/sites/:id', async (req: Request, res: Response): Promise<void> => {
     res.status(200).json({ success: true, data: { siteId: id, ...updateData } });
   } catch (error) {
     console.error('[Admin] Gagal kemaskini tapak:', error);
-    res.status(500).json({ success: false, error: { message: 'Ralat pelayan' } });
+    res.status(500).json({ success: false, error: { message: error instanceof Error ? error.message : String(error) } });
   }
 });
 
